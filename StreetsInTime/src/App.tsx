@@ -1,122 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+// 1. Define our visual states (Simulating AI interpolation/decision paths)
+const UI_THEMES = {
+  calm: {
+    background: '#e0f2f1',
+    accent: '#00695c',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500', 
+    description: 'AI Vision detected a calm mood. Adjusting UI to soft tones.'
+  },
+  energetic: {
+    background: '#fff3e0',
+    accent: '#d84315',
+    image: 'https://images.unsplash.com/photo-1519750157634-b6d493a0f77c?w=500', 
+    description: 'AI Vision detected high energy. Swapping to vibrant UI configurations.'
+  }
+};
+ 
+export default function App() {
+  // Start with the 'calm' state
+  const [currentMood, setCurrentMood] = useState<'calm' | 'energetic'>('calm');
+  const currentUI = UI_THEMES[currentMood];
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app-container" style={{ backgroundColor: currentUI.background }}>
+      <header style={{ borderBottom: `2px solid ${currentUI.accent}` }}>
+        <h1 style={{ color: currentUI.accent }}>Adaptive AI Interface</h1>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <main>
+        <div className="image-frame" style={{ borderColor: currentUI.accent }}>
+          {/* The image updates dynamically based on state */}
+          <img src={currentUI.image} alt={currentMood} className="interpolated-image" />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <p className="status-text">{currentUI.description}</p>
+
+        {/* Action Buttons to trigger the state change */}
+        <div className="button-group">
+          <button 
+            className="action-btn"
+            style={{ backgroundColor: currentMood === 'calm' ? currentUI.accent : '#ccc' }}
+            onClick={() => setCurrentMood('calm')}
+          >
+            Trigger Calm State
+          </button>
+          
+          <button 
+            className="action-btn"
+            style={{ backgroundColor: currentMood === 'energetic' ? currentUI.accent : '#ccc' }}
+            onClick={() => setCurrentMood('energetic')}
+          >
+            Trigger Energetic State
+          </button>
+        </div>
+      </main>
+    </div>
+  );
 }
-
-export default App
