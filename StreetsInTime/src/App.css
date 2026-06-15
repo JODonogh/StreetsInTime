@@ -1,5 +1,6 @@
 .app-container {
   min-height: 100vh;
+  min-width: 100vw;
   padding: 20px;
   font-family: sans-serif;
   transition: background-color 0.8s ease; /* Smoothly transitions background colors */
