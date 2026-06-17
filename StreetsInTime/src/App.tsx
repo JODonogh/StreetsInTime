@@ -12,8 +12,6 @@ const UI_THEMES = {
 };
  
 export default function App() {
-  const pdesc ="This is a p";
-  const divDesc = "this is div";
   const articleDesc = "This is an article";
   const asideDesc = "This is an aside";
 
@@ -26,16 +24,19 @@ export default function App() {
     </header>
     </hgroup>
     <main>
+      <h4>This is main</h4>
+      <div>
     <p>
       <search>search</search>
-      {pdesc}
+      <blockquote>This is a quote
+      </blockquote>
+        <cite>This is a citation: https://www.merriam-webster.com/dictionary/link</cite>
     </p>
-    <div>
-      {divDesc}
     </div>
     <article>
       {articleDesc}
     </article>
+    </main>
     <aside>
       <h3>This is the sidebar</h3>
       <nav>
@@ -46,9 +47,8 @@ export default function App() {
       </nav>
       {asideDesc}
     </aside>
-    </main>
     <footer>
-      <section><h3>This is a section</h3>
+      <section><h3>This is the footer</h3>
       <button>Button</button>
       </section>
     </footer>
